@@ -1,12 +1,9 @@
+
 import discord
 import datetime
 from discord.ext import commands
 from discord.colour import Color
-from urllib import parse, request
-import re
-##from discord.ext.commands.core import Command
 import music
-import youtube_dl
 
 intents = discord.Intents.default()
 intents.typing = False
@@ -14,17 +11,18 @@ intents.presences = False
 
 cogs = [music]
 
-client = commands.Bot(command_prefix='-', intents = intents )
+client = commands.Bot(command_prefix='!', intents=intents)
 
-### comando Ping
+# comando Ping
 @client.command()
 async def ping(ctx):
     await ctx.send('pong')
-    
-### comnado Info
+
+# comnado Info
 @client.command()
 async def info(ctx):  # informacion del servidor
-    embed = discord.Embed(title=f"{ctx.guild.name}", description="Hola bandamax",timestamp=datetime.datetime.utcnow(), Color=discord.Colour.blue())
+    embed = discord.Embed(title=f"{ctx.guild.name}", description="Hola bandamax",
+                          timestamp=datetime.datetime.utcnow(), Color=discord.Colour.blue())
     embed.add_field(name="Server created at", value=f"{ctx.guild.created_at}")
     embed.add_field(name="Server Owner", value=f"{ctx.guild.owner}")
     embed.add_field(name="Server Region", value=f"{ctx.guild.region}")
@@ -34,19 +32,15 @@ async def info(ctx):  # informacion del servidor
     await ctx.send(embed=embed)
 
 
-
-
-
-for i in range(len(cogs)):
-    cogs[i].setup(client)
-
-### Aviso de activado
+# Aviso de activado
 @client.event
 async def on_ready():
     print('Logged in as')
     print(client.user.name)  # nombre del server
 #   print(bot.user.id)          #id del bot
-    print('Estoy listo papi')
-    print('------')
+    print('Running...')
 
-client.run('')
+for i in range(len(cogs)):
+    cogs[i].setup(client)
+
+client.run("OTEzMjczOTMzMjA4MzU5MDEy.YZ8GoQ.a4SDUaTOGmxPJM-LP4xdpf6XYWw")
