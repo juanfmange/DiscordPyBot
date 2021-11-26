@@ -1,7 +1,8 @@
 import discord
 from discord.ext import commands
 import youtube_dl
-
+import re
+from urllib import parse, request
 class music (commands.Cog):
     def __init__(self, client):
         self.client = client
@@ -44,6 +45,16 @@ class music (commands.Cog):
         await ctx.voice_client.resume()
         await ctx.send("Resume")
 
+
+    @commands.command()
+    async def youtube(ctx, *, search):  # busqueda en youtube
+        query_string = parse.urlencode({'search_query': search})
+        html_content = request.urlopen(
+            'https://www.youtube.com/results?' + query_string)
+        search_results = re.findall(
+            'href=\"\\/watch\\?v=(.{11})', html_content.read().decode())
+        print(search_results)
+        await ctx.send('http://www.youtube.com/watch?v=' + search_results[0])
 
 
 def setup(client):
