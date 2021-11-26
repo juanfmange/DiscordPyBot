@@ -43,4 +43,4 @@ async def on_ready():
 for i in range(len(cogs)):
     cogs[i].setup(client)
 
-client.run("OTEzMjczOTMzMjA4MzU5MDEy.YZ8GoQ.a4SDUaTOGmxPJM-LP4xdpf6XYWw")
+client.run("TOKEN")
